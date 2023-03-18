@@ -1,0 +1,243 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "API de Consulta de Couros",
+    "description": "Edita, cria e deleta couros",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "leandro@gmail.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "version": "1.0.0"
+  },
+    "paths": {
+      "/fornecedores": {
+        "post":{
+          "summary": "Cria um novo fornecedor",
+          "requestBody":{
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "properties":{
+                    "razaosocial":{
+                      "type":"string"
+                    },
+                    "nomefantasia":{
+                      "type":"string"
+                    },
+                    "cnpj":{
+                      "type":"string"
+                    }               
+                  }
+                }                
+              }
+            }
+          },
+          "responses":{
+            "201":{
+              "description": "Sucesso",
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "type": "object",
+                    "$ref": "#/components/schemas/Fornecedor"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get":{
+          "summary": "Recupera todos os forncecedores",
+          "responses": {
+            "200": {
+              "description": "Sucesso",
+              "content":{
+                "application/json":{
+                  "schema":{
+                    "type":"array",
+                    "items": {
+                      "$ref": "#/components/schemas/Fornecedor"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/fornecedores/{id}":{
+        "parameters": [{
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "schema":{
+            "type": "integer",
+            "format":"int64"
+          }
+        }],
+        "put":{
+          "summary": "Atualiza um fornecedor",
+          "requestBody":{
+            "content":{
+              "application/json":{
+                "schema":{
+                  "type": "object",
+                  "properties":{
+                    "razaosocial":{
+                      "type":"string"
+                    },
+                    "nomefantasia":{
+                      "type":"string"
+                    },
+                    "cnpj":{
+                      "type":"string"
+                    }               
+                  }
+                }                
+              }
+            }
+          },
+          "responses":{
+            "200":{
+              "description": "Sucesso",
+              "content": {
+                "application/json":{
+                  "schema":{
+                    "type": "object",
+                    "properties":{
+                      "razaosocial":{
+                        "type":"string"
+                      },
+                      "nomefantasia":{
+                        "type":"string"
+                      },
+                      "cnpj":{
+                        "type":"string"
+                      },
+                      "creatAt":{
+                        "type":"string",
+                        "format":"date-time"
+                      },
+                      "updateAt":{
+                        "type":"string",
+                        "format":"date-time"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404":{
+              "description": "Caso não encontre o fornecedor",
+              "content":{
+                "application/json":{
+                  "example":"not found"
+                }
+              }
+            }
+          }
+        },
+        "delete":{
+          "summary":"Deleta um fornecedor pelo id",
+          "responses":{
+            "200":{
+              "description": "Sucesso",
+              "content": {
+                "application/json":{
+                  "schema":{
+                    "type": "object",
+                    "properties":{
+                      "id":{
+                        "type":"integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "get":{
+          "summary":"Recupera fornecedor pelo id",
+          
+          "responses":{
+            "200":{
+              "description": "Sucesso",
+              "content": {
+                "application/json":{
+                  "schema":{
+                    "type": "object",
+                    "properties":{
+                      "id":{
+                        "type":"integer"
+                      },
+                      "razaosocial":{
+                        "type":"string"
+                      },
+                      "nomefantasia":{
+                        "type":"string"
+                      },
+                      "cnpj":{
+                        "type":"string"
+                      },
+                      "creatAt":{
+                        "type":"string",
+                        "format":"date-time"
+                      },
+                      "updateAt":{
+                        "type":"string",
+                        "format":"date-time"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "404":{
+              "description": "Caso não encontre o fornecedor",
+              "content":{
+                "application/json":{
+                  "example": "not found"
+                }
+              }
+            }          
+          }
+        }
+      }
+
+  },
+  "components":{
+    "schemas":{
+      "Fornecedor":{
+        "type":"object",
+          "properties":{
+            "id":{
+              "type":"integer"
+            },
+            "razaosocial":{
+              "type":"string"
+            },
+            "nomefantasia":{
+              "type":"string"
+            },
+            "cnpj":{
+              "type":"string"
+            },
+            "creatAt":{
+              "type":"string",
+              "format":"date-time"
+            },
+            "updateAt":{
+              "type":"string",
+              "format":"date-time"
+            }       
+          }
+      }     
+    }
+  }
+}   
